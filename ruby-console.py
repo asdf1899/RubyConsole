@@ -3,7 +3,14 @@ import shutil, os
 
 
 def main():
+    print("Portable Ruby Console v1.0")
+    print(" ")
+    print("Modify the config file to set your ruby path")
     PATH = readConfig()
+    print("Current path: " + PATH)
+    print(" ")
+    print("Type 'help' for config information")
+    print(" ")
     while True:
         print("1) Run a ruby script")
         print("2) Help")
@@ -18,8 +25,7 @@ def main():
             except IOError:
                 print("Error: File not found - " + filename)
         elif shell == "2":
-            #Help(PATH)
-            pass
+            Help(PATH)
         elif shell == "3":
             break
 
@@ -27,7 +33,7 @@ def execute(PATH, filename):
     currentFile = os.path.realpath(filename)
     shutil.copy2(currentFile, PATH + "temp.rb")
     os.popen("start " + PATH+ "irb " + PATH+"temp.rb").read()
-    #os.startfile(PATH +"ruby-console")
+    #os.startfile(PATH +"ruby-console.bat")
 
 def readConfig():
     f = open("config.txt")
@@ -36,6 +42,23 @@ def readConfig():
     if file != file + "/":
         file= file+ "/"
     return file
+
+def Help(PATH):
+    print(" ")
+    print("Portable Ruby Console v1.0 Copyright 2016 Anas Araid")
+    print(" ")
+    print("Current path: " + PATH)
+    print(" ")
+    print("Set your ruby bin folder path in the config.txt ")
+    print("The path MUST NOT have spaces or quotation marks. So move it somewhere else. ")
+    print("Ex. wrong path --> 'C:/Program Files (x86)/ruby-version-mingw32/bin'")
+    print("Ex. right path --> 'C:/ruby-version-mingw32/bin' ")
+    print(" or C:/Users/YourNameWithoutSpaces/Desktop/ruby-version-mingw32")
+    print(" ")
+    print("Insert the script file name with the extension.")
+    print("Ex. filename.rb")
+    print(" ")
+    
 
 if __name__ == '__main__':
     main()
