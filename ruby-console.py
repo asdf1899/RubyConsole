@@ -9,7 +9,7 @@ def main():
     PATH = readConfig()
     print("Current path: " + PATH)
     print(" ")
-    print("Type 'help' for config information")
+    print("Type '2' (help) for config information")
     print(" ")
     while True:
         print("1) Run a ruby script")
