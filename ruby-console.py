@@ -20,10 +20,15 @@ def main():
             try:
                 print("Insert the file name with the extension")
                 filename = input("$> ")
-                open(filename)            
-                execute(PATH, filename)
+                open(filename)
+                try:
+                    execute(PATH, filename)
+                except IOError:
+                    print("Error: this path " + PATH + " doesn't exit")
+                    print(" ")
             except IOError:
                 print("Error: File not found - " + filename)
+                print(" ")
         elif shell == "2":
             Help(PATH)
         elif shell == "3":
