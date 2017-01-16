@@ -1,4 +1,6 @@
 #-*- coding: UTF-8 -*-
+__author__ = "Anas Araid"
+
 import shutil, os
 
 
@@ -44,10 +46,26 @@ def readConfig():
     f = open("config.txt")
     for ff in f.readlines():
         file= ff.strip()
-    if file != file + "/":
-        file= file+ "/"
-    return file
+    try:
+        if file != file + "/":
+            file= file+ "/"
+        if checkPath(file) == False:
+            print("FATAL ERROR: Invalid ruby bin folder path")
+            return False
+        else:
+            return file
+    except UnboundLocalError:
+        print("FATAL ERROR: Config file empty")
+        print("Please set your ruby bin folder path in the config.txt")
+        return False
 
+def checkPath(file):
+    exist = os.path.isdir(file)
+    return exist
+    
+
+
+#C:\Users\Anas\Desktop\app\ruby-2-3-3\bin
 def Help(PATH):
     print(" ")
     print("Portable Ruby Console v1.0 Copyright 2016 Anas Araid")
