@@ -8,33 +8,37 @@ def main():
     print("Portable Ruby Console v1.0")
     print(" ")
     print("Modify the config file to set your ruby path")
+    print(" ")
     PATH = readConfig()
-    print("Current path: " + PATH)
-    print(" ")
-    print("Type '2' (help) for config information")
-    print(" ")
-    while True:
-        print("1) Run a ruby script")
-        print("2) Help")
-        print("3) Exit")
-        shell = input(">> ")
-        if shell == "1":
-            try:
-                print("Insert the file name with the extension")
-                filename = input("$> ")
-                open(filename)
+    if PATH == False:
+        pass
+    else:
+        print("Current path: " + PATH)
+        print(" ")
+        print("Type '2' (help) for config information")
+        print(" ")
+        while True:
+            print("1) Run a ruby script")
+            print("2) Help")
+            print("3) Exit")
+            shell = input(">> ")
+            if shell == "1":
                 try:
-                    execute(PATH, filename)
+                    print("Insert the file name with the extension")
+                    filename = input("$> ")
+                    open(filename)
+                    try:
+                        execute(PATH, filename)
+                    except IOError:
+                        print("Error: this path " + PATH + " doesn't exit")
+                        print(" ")
                 except IOError:
-                    print("Error: this path " + PATH + " doesn't exit")
+                    print("Error: File not found - " + filename)
                     print(" ")
-            except IOError:
-                print("Error: File not found - " + filename)
-                print(" ")
-        elif shell == "2":
-            Help(PATH)
-        elif shell == "3":
-            break
+            elif shell == "2":
+                Help(PATH)
+            elif shell == "3":
+                break
 
 def execute(PATH, filename):
     currentFile = os.path.realpath(filename)
