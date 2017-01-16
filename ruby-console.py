@@ -2,7 +2,7 @@
 __author__ = "Anas Araid"
 
 import shutil, os
-
+from time import sleep
 
 def main():
     print("Portable Ruby Console v1.0")
@@ -29,6 +29,8 @@ def main():
                     open(filename)
                     try:
                         execute(PATH, filename)
+                        sleep(1)
+                        os.remove(PATH + "temp.rb")
                     except IOError:
                         print("Error: this path " + PATH + " doesn't exit")
                         print(" ")
